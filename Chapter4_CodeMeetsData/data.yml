@@ -1,0 +1,5 @@
+$schema: https://azuremlschemas.azureedge.net/latest/data.schema.json
+
+type: uri_file
+name: weather-portofTurku-processed
+path: Dataset/weather_dataset_processed.csv
