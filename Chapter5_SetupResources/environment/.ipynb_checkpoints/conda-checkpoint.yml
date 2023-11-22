@@ -1,0 +1,13 @@
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - pip
+  - pathlib
+  - pandas>=1.0
+  - numpy=1.22.3
+  - mlflow==1.21.0
+  - typer==0.3.2
+  - matplotlib==3.4.3
+  - scikit-learn=1.0
+name: modeltrainingenv

@@ -11,5 +11,5 @@ az configure --defaults group=<RESOURCE_GROUP> workspace=<ML_WORKSPACE>
 
 # Create data asset
 ```console
-az ml data create --file data.yml
+az ml data create --file registerdataset.yml
 ```

@@ -1,0 +1,8 @@
+$schema: https://azuremlschemas.azureedge.net/latest/amlCompute.schema.json 
+name: training-compute
+location: northeurope
+type: amlcompute
+size: STANDARD_DS3_V2
+min_instances: 1
+max_instances: 2
+idle_time_before_scale_down: 60
