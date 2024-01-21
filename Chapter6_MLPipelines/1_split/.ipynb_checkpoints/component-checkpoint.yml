@@ -1,0 +1,42 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: train_test_split
+display_name: Splits features and targets into test and train sets
+
+environment: azureml:modeltraning-env@latest
+inputs:
+  input_data:
+    type: uri_file
+  random_state:
+    type: integer
+    default: 42
+    min: 0
+  test_size:
+    type: number
+    default: 0.3
+    min: 0.1
+    max: 0.3  
+outputs:
+  features_train:
+    type: uri_file
+  targets_train:
+    type: uri_file
+  features_test:
+    type: uri_file
+  targets_test:
+    type: uri_file   
+is_deterministic: false
+
+code: src
+
+command: >-
+  python main.py
+  --input-data ${{inputs.input_data}} 
+  --random-state ${{inputs.random_state}}
+  --test-size ${{inputs.test_size}}
+  --features-train ${{outputs.features_train}} 
+  --targets-train ${{outputs.targets_train}} 
+  --features-test ${{outputs.features_test}} 
+  --targets-test ${{outputs.targets_test}} 
+

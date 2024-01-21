@@ -1,0 +1,27 @@
+$schema: https://azuremlschemas.azureedge.net/latest/commandComponent.schema.json
+type: command
+
+name: model_training
+display_name: SVC Model training for Weather Prediction Model
+
+inputs:
+  features_train:
+    type: uri_file
+  features_test:
+    type: uri_file
+  targets_train:
+    type: uri_file
+  targets_test:
+    type: uri_file
+
+is_deterministic: false
+
+code: src
+
+environment: azureml:modeltraning-env@latest
+
+command: >-
+  python main.py --features-train ${{inputs.features_train}} --features-test ${{inputs.features_test}} --targets-train ${{inputs.targets_train}} --targets-test ${{inputs.targets_test}}
+
+
+
