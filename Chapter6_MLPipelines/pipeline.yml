@@ -1,0 +1,29 @@
+$schema: https://azuremlschemas.azureedge.net/latest/pipelineJob.schema.json
+type: pipeline
+
+experiment_name: model_training_svc
+display_name: Support vector machine training for weather prediction
+
+settings:
+  default_compute: azureml:training-compute
+
+inputs:
+  input_data:
+    type: uri_file
+    path: azureml:weather-portofTurku-processed@latest
+
+jobs:         
+  split:
+    component: 1_split/component.yml
+    inputs:
+      input_data: ${{parent.inputs.input_data}}     
+      
+  train:
+    component: 2_train/component.yml
+    inputs:
+        features_train: ${{parent.jobs.split.outputs.features_train}} 
+        features_test: ${{parent.jobs.split.outputs.features_test}}
+        targets_train: ${{parent.jobs.split.outputs.targets_train}}
+        targets_test: ${{parent.jobs.split.outputs.targets_test}}       
+      
+        
