@@ -7,6 +7,7 @@ import pandas as pd
 import typer
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.svm import SVC
 
 
@@ -43,6 +44,21 @@ def main(
     
     # Fit the SVC model with training data
     svc.fit(features_train_data, targets_train_data)
+    
+    
+    # Predict on the test data
+    predicted_svc = svc.predict(features_test_data)
+
+    # Evaluate the model and log metrics using MLflow
+    acc = accuracy_score(targets_test_data, predicted_svc)
+    fscore = f1_score(targets_test_data, predicted_svc, average="macro")
+    precision = precision_score(targets_test_data, predicted_svc, average="macro")
+    recall = recall_score(targets_test_data, predicted_svc, average="macro")
+
+    mlflow.log_metric("accuracy", acc)
+    mlflow.log_metric("f1_score", fscore)
+    mlflow.log_metric("precision", precision)
+    mlflow.log_metric("recall", recall)
     
     # Log and Register the trained SVC model using MLflow
     mlflow.sklearn.log_model(svc, 'model', registered_model_name="WeatherPrediction-Model")
