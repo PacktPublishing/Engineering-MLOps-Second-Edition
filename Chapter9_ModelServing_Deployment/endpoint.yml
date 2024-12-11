@@ -1,7 +1,11 @@
 $schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
 name: weather-prediction
-compute: azureml:weather-prediction-cluster
 auth_mode: key
 description: "Endpoint for Weather Prediction SVC Model"
 tags:
   Project: weather-prediction
+
+# Define compute configuration
+compute: 
+  instance_type: Standard_DS3_v2  # Specify the VM size
+  instance_count: 1               # Number of instances
