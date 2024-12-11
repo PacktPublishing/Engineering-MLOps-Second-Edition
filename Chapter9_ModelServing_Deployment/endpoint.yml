@@ -1,0 +1,7 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineEndpoint.schema.json
+name: weather-prediction
+compute: azureml:weather-prediction-cluster
+auth_mode: key
+description: "Endpoint for Weather Prediction SVC Model"
+tags:
+  Project: weather-prediction
